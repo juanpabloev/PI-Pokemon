@@ -62,12 +62,29 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTER_BY_TYPE:
       const statePokemonsType = state.pokemons;
-      const filteredPokemonType1 = statePokemonsType.filter(
-        (pokemon) => pokemon.types[0] === action.payload
-      );
-      const filteredPokemonType2 = statePokemonsType.filter(
-        (pokemon) => pokemon.types[1] === action.payload
-      );
+      const filteredPokemonType1 = statePokemonsType.filter((pokemon) => {
+        if (
+          /^[0-9A-F]{8}-[0-9A-F]{4}-[1][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(
+            pokemon.id
+          )
+        ) {
+          return pokemon.types[0].name === action.payload;
+        }
+        return pokemon.types[0] === action.payload;
+      });
+      const filteredPokemonType2 = statePokemonsType.filter((pokemon) => {
+        if (pokemon.types.length > 1) {
+          if (
+            /^[0-9A-F]{8}-[0-9A-F]{4}-[1][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(
+              pokemon.id
+            )
+          ) {
+            return pokemon.types[1].name === action.payload;
+          }
+          return pokemon.types[1] === action.payload;
+        }
+        return false;
+      });
       return {
         ...state,
         pokemons: [...filteredPokemonType1, ...filteredPokemonType2],

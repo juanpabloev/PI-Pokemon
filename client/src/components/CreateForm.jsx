@@ -5,20 +5,29 @@ import { createPokemon } from "../redux/actions";
 import "./CreateFrom.css";
 const validate = (input) => {
   const err = {};
+  let intPattern = /^-?[0-9]+$/;
 
   if (!input.name) {
     err.nameError = "name is required";
   }
 
   if (input.height < 0.1 || input.height > 1000) {
-    err.valueError = "height  must be between  0.1 and 1000";
+    err.infoError = "height  must be between  0.1 and 1000";
   }
   if (input.weight < 0.1 || input.weight > 1000) {
-    err.valueError = "height  must be between  0.1 and 1000";
+    err.infoError = "weight  must be between  0.1 and 1000";
   }
 
   if (input.hp < 1 || input.atk < 1 || input.spd < 1 || input.def < 1) {
     err.valueError = "values of any stat must be above 0";
+  }
+  if (
+    !intPattern.test(input.hp) ||
+    !intPattern.test(input.atk) ||
+    !intPattern.test(input.spd) ||
+    !intPattern.test(input.def)
+  ) {
+    err.valueError = "values of any stat must be a integer";
   }
 
   return err;
@@ -37,7 +46,7 @@ const CreateForm = () => {
     weight: 0.1,
     height: 0.1,
 
-    types: [types[0].id, "none"],
+    types: [types[0].id],
   });
 
   const [name, setName] = useState([types[0].name, ""]);
@@ -65,21 +74,34 @@ const CreateForm = () => {
       if (!value) {
         setError({ ...error, typeError: "type 1 is required" });
       }
-      setInput({
-        ...input,
-        types: [value, input.types[1]],
-      });
-      setName([types.find((type) => type.id === value).name, name[1]]);
+      if (input.types.length > 1) {
+        setInput({
+          ...input,
+          types: [value, input.types[1]],
+        });
+        setName([types.find((type) => type.id === value).name, name[1]]);
+      } else {
+        setInput({
+          ...input,
+          types: [value],
+        });
+        setName([types.find((type) => type.id === value).name]);
+      }
     }
     if (e.target.name === "type2") {
-      if (value === input.types[0]) {
-        value = "";
+      if (value === "none" || value === input.types[0]) {
+        setInput({
+          ...input,
+          types: [input.types[0]],
+        });
+        setName([name[0]]);
+      } else {
+        setInput({
+          ...input,
+          types: [input.types[0], value],
+        });
+        setName([name[0], types.find((type) => type.id === value).name]);
       }
-      setInput({
-        ...input,
-        types: [input.types[0], value],
-      });
-      setName([name[0], types.find((type) => type.id === value).name]);
     }
   };
 

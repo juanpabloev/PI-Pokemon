@@ -10,6 +10,10 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.details img {
+  width: 500px;
+  height: 500px;
+}
 .details-stats li,
 span {
   margin: 25px;

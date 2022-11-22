@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetails } from "../redux/actions";
 import "./Detail.css";
+import eggImage from "../img/egg.png";
 const Detail = () => {
   const { id } = useParams();
   const details = useSelector((state) => state.details);
@@ -14,8 +15,7 @@ const Detail = () => {
 
   let img;
   if (!details.img) {
-    img =
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngitem.com%2Fmiddle%2FTJbobo_pokemon-egg-png-transparent-png%2F&psig=AOvVaw1TfYz2OWIKl7HCAGYFi5Dd&ust=1669237699765000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCLjriJPZwvsCFQAAAAAdAAAAABAE";
+    img = eggImage;
   } else {
     img = details.img;
   }
