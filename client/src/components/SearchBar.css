@@ -1,0 +1,30 @@
+.searchbar {
+  background-color: #30343f;
+  display: flex;
+  left: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100px;
+}
+
+.searchbar input {
+  margin: 5px;
+  width: 250px;
+  height: 20px;
+  color: rgb(58, 57, 98);
+  background-color: #c3c3c3;
+  border: 2px solid rgb(15, 15, 15);
+}
+
+.searchbar button {
+  margin: 5px;
+  background-color: #c3c3c3;
+  padding: 5px;
+}
+
+.searchbar button:hover {
+  background-color: #1d1d1d;
+  border: 2px solid rgb(183, 183, 183);
+  color: aliceblue;
+}

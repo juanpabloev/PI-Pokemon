@@ -1,0 +1,34 @@
+.details {
+  color: white;
+  align-items: center;
+}
+.details h2 {
+  text-align: center;
+  margin: 30px;
+  font-weight: bold;
+  font-size: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.details-stats li,
+span {
+  margin: 25px;
+  margin-bottom: 50px;
+  padding: 10px;
+  background-color: #e4d9ff;
+  border: 2px solid black;
+  border-radius: 5px;
+  color: black;
+}
+
+hr {
+  margin-top: 20px;
+}
+
+.details-info li {
+  margin: 5px;
+  padding: 7px;
+  background-color: #30343f;
+  border: 2px solid black;
+  border-radius: 5px;
+}
