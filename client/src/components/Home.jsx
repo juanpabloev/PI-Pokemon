@@ -61,6 +61,9 @@ const Home = () => {
     dispatch(sortByAtk(e.target.value));
     setCurrentPage(1);
     setCurrentOrder(` ${e.target.value}`);
+    if (currentorder === "mmm") {
+      console.log("what");
+    }
   };
   const handleAlphaSort = (e) => {
     e.preventDefault();
