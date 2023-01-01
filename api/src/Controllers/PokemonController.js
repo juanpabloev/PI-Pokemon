@@ -21,6 +21,8 @@ const getApiPokemonData = async () => {
         return slot.type.name;
       }),
       atk: data.stats[1].base_stat,
+      weight: data.weight,
+      height: data.height,
     };
     apiPokemons.push(pokemonInfo);
   }
@@ -82,6 +84,7 @@ const getPokemonByName = async (pokemonName) => {
     pokemon = {
       id: data.id,
       name: data.name,
+      weight: data.weight,
       img: data.sprites.other["official-artwork"].front_default,
       types: data.types.map((slot) => {
         return slot.type.name;
@@ -115,6 +118,7 @@ const getPokemonByNameDB = async (name) => {
         id: pokemonDb.id,
         atk: pokemonDb.atk,
         name: pokemonDb.name,
+        weight: pokemonDb.weight,
         types: pokemonDb.types.map((type) => type.name),
       };
     }
