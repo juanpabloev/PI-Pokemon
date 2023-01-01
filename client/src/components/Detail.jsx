@@ -6,6 +6,7 @@ import "./Detail.css";
 import eggImage from "../img/egg.png";
 const Detail = () => {
   const { id } = useParams();
+  const error = useSelector((state) => state.error);
   const details = useSelector((state) => state.details);
   const dispatch = useDispatch();
 
@@ -22,6 +23,7 @@ const Detail = () => {
 
   return (
     <section className="details">
+      {Object.keys(error).length > 0 && <p className="errors">{error.error}</p>}
       <div className="details-info">
         <h2>{details.name}</h2>
         <span>weight: {details.weight}</span>

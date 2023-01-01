@@ -10,6 +10,7 @@ import {
   refresh,
   sortByAtk,
   sortAlpha,
+  filterAbove905,
 } from "../redux/actions";
 import { Link } from "react-router-dom";
 import Pokemon from "./Pokemon";
@@ -21,6 +22,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
   const types = useSelector((state) => state.types);
+  const error = useSelector((state) => state.error);
 
   const [currentorder, setCurrentOrder] = useState("");
 
@@ -66,9 +68,16 @@ const Home = () => {
     setCurrentPage(1);
     setCurrentOrder(` ${e.target.value}`);
   };
+  const handleFilterWeight = (e) => {
+    e.preventDefault();
+    dispatch(filterAbove905());
+    setCurrentPage(1);
+    setCurrentOrder(` above 905`);
+  };
   return (
     <section className="home">
       <SearchBar />
+      {Object.keys(error).length > 0 && <p className="errors">{error.error}</p>}
       <div className="searchFilter">
         <label>Sort:</label>
         <select name="alphabetical" onChange={(e) => handleAlphaSort(e)}>
@@ -100,6 +109,9 @@ const Home = () => {
           })}
         </select>
         <button onClick={() => handleRefresh()}>Clear Filters</button>
+        <button onClick={(e) => handleFilterWeight(e)}>
+          weight above or equal: 905
+        </button>
       </div>
       <div>
         <Pages

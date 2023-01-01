@@ -11,6 +11,8 @@ export const SORT_ALPHA = "SORT_ALPHA";
 export const GET_POKEMON_NAME = "GET_POKEMON_NAME";
 export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_DETAILS = "GET_DETAILS";
+export const ABOVE_905 = "ABOVE_905";
+
 export const getAllPokemons = () => {
   return async function (dispatch) {
     try {
@@ -46,6 +48,12 @@ export const filterByType = (payload) => {
   return {
     type: FILTER_BY_TYPE,
     payload,
+  };
+};
+
+export const filterAbove905 = () => {
+  return {
+    type: ABOVE_905,
   };
 };
 

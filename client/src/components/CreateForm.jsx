@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createPokemon } from "../redux/actions";
+import { Link } from "react-router-dom";
 import "./CreateFrom.css";
 const validate = (input) => {
   const err = {};
@@ -36,6 +37,7 @@ const validate = (input) => {
 const CreateForm = () => {
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
+  const dispatchError = useSelector((state) => state.error);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
     name: "name",
@@ -110,11 +112,15 @@ const CreateForm = () => {
 
     if (!Object.keys(error).length) {
       dispatch(createPokemon(input, name));
+      alert("Pokemon send succefully");
     }
   };
 
   return (
     <section className="sectionForm">
+      <Link to="/home">
+        <button>{"<<<"}</button>
+      </Link>
       <form onSubmit={(e) => handleSubmit(e)} className="form">
         <label htmlFor="name">name:</label>
         <input
@@ -216,6 +222,10 @@ const CreateForm = () => {
         </ul>
       ) : (
         <></>
+      )}
+
+      {Object.keys(dispatchError).length > 0 && (
+        <p className="errors">{dispatchError.error}</p>
       )}
     </section>
   );

@@ -10,6 +10,7 @@ import {
   GET_POKEMON_NAME,
   CREATE_POKEMON,
   GET_DETAILS,
+  ABOVE_905,
 } from "./actions";
 
 const initialState = {
@@ -89,10 +90,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: [...filteredPokemonType1, ...filteredPokemonType2],
       };
+
     case REFRESH:
       return {
         ...state,
         pokemons: state.totalPokemons,
+      };
+    case ABOVE_905:
+      return {
+        ...state,
+        pokemons: state.pokemons.filter((pokemon) => pokemon.weight >= 905),
       };
     case SORT_BY_ATK:
       let sortedByAtk = state.pokemons;
